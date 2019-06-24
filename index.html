@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="manageJobsApp">
+
+  <head>
+    <script data-require="angularjs@1.6.4" data-semver="1.6.4" src="https://code.angularjs.org/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <!-- project scripts -->
+    <script src="app/app.js"></script>
+    <script src="app/home/homeCtrl.js"></script>
+    <script src="app/login/loginCtrl.js"></script>
+    <script src="app/signup/signupCtrl.js"></script>
+    <script src="app/logout/logoutCtrl.js"></script>
+    <script src="app/tips/tipsCtrl.js"></script>
+  </head>
+
+  <body>
+   
+    <ng-view></ng-view>
+  
+  </body>
+
+</html>
