@@ -5,7 +5,7 @@ app.config(function($routeProvider) {
   $routeProvider.
     when("/", {
       templateUrl: "app/home/home.html",
-      controller: "homeCtrl"
+      // controller: "homeCtrl"
     }).when("/login", {
       templateUrl: "app/login/login.html",
       controller: "loginCtrl"
