@@ -7,13 +7,13 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
     var nextApplieId;
 
     // New ES6 syntax for creating a constructor
-    class Applie {
-        constructor(parseApplie) {
-            this.id = parseApplie.id;
-            this.name = parseApplie.get("company");
-            this.title = parseApplie.get("title");
-            this.location = parseApplie.get("location");
-            this.status = parseApplie.get("status");
+    class Apply {
+        constructor(parseApply) {
+            this.id = parseApply.id;
+            this.name = parseApply.get("company");
+            this.title = parseApply.get("title");
+            this.location = parseApply.get("location");
+            this.status = parseApply.get("status");
         }
     }
 
@@ -23,15 +23,15 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
         var applies = [];
 
         // Building a query
-        var ApplieParse = Parse.Object.extend('Applie');
-        var query = new Parse.Query(ApplieParse);
+        var ApplyParse = Parse.Object.extend('jobReply');
+        var query = new Parse.Query(ApplyParse);
         query.equalTo("userId", Parse.User.current());
 
         // Executing the query
         query.find().then((results) => {
-          console.log('Applie found', results);
+          console.log('Apply found', results);
           for (let index = 0; index < results.length; index++) {
-              applies.push(new Applie(results[index]));
+              applies.push(new Apply(results[index]));
           }
           async.resolve(applies);
         }, (error) => {
@@ -42,25 +42,26 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
         return async.promise;
     }
 
-    function addApplie(name, desc, img) {
+    function addApply(company, title, location, status) {
         var async = $q.defer();
 
         // Preparing the new parse recipe object to save
-        var ApplieParse = Parse.Object.extend('jobReply');
-        var newApplie = new ApplieParse();
-        newApplie.set('company', company);
-        newApplie.set('title', title);
-        newApplie.set('location', location);
-        newApplie.set('userId', Parse.User.current());
+        var ApplyParse = Parse.Object.extend('jobReply');
+        var newApply = new ApplyParse();
+        newApply.set('company', company);
+        newApply.set('title', title);
+        newApply.set('location', location);
+        newApply.set('status', status);
+        newApply.set('userId', Parse.User.current());
 
         // Actual saving the new recipe in Parse
-        newApplie.save().then(
+        newApply.save().then(
           function (result) {
-            console.log('Applie created', result);
-            async.resolve(new Applie(result));
+            console.log('Apply created', result);
+            async.resolve(new Apply(result));
           },
           function (error) {
-            console.error('Error while creating Applie: ', error);
+            console.error('Error while creating Apply: ', error);
             async.reject(error);
           }
         );
@@ -70,7 +71,7 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
 
     return {
         getActiveUserApplies: getActiveUserApplies,
-        addApplie: addApplie
+        addApply: addApply
     }
 
 });

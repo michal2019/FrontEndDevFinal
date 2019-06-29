@@ -30,20 +30,20 @@ app.controller("jobRepliesCtrl", function($scope, userSrv, $location, appliesSrv
 
 })
 
-$scope.query = "";
-$scope.filterCar = function(car) {
-  // if (!$scope.query) {
-  //   return true;
-  // }
+// $scope.query = "";
+// $scope.filterCar = function(car) {
+//   // if (!$scope.query) {
+//   //   return true;
+//   // }
   
-  // converting to lower case to do a case insensitive comparison
-  if (car.brand.toLowerCase().includes($scope.query.toLowerCase()) || 
-      car.model.toLowerCase().includes($scope.query.toLowerCase())) {
-    return true;
-  } else {
-    return false;
-  }
-};
+//   // converting to lower case to do a case insensitive comparison
+//   if (car.brand.toLowerCase().includes($scope.query.toLowerCase()) || 
+//       car.model.toLowerCase().includes($scope.query.toLowerCase())) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
 
 // $scope.orderProp = "";
 // $scope.orderReverse = false;
