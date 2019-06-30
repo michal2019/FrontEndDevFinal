@@ -10,7 +10,7 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
     class Apply {
         constructor(parseApply) {
             this.id = parseApply.id;
-            this.name = parseApply.get("company");
+            this.company = parseApply.get("company");
             this.title = parseApply.get("title");
             this.location = parseApply.get("location");
             this.status = parseApply.get("status");
@@ -25,7 +25,7 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
         // Building a query
         var ApplyParse = Parse.Object.extend('jobReply');
         var query = new Parse.Query(ApplyParse);
-        query.equalTo("userId", Parse.User.current());
+        query.equalTo("userID", Parse.User.current());
 
         // Executing the query
         query.find().then((results) => {
@@ -52,7 +52,7 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
         newApply.set('title', title);
         newApply.set('location', location);
         newApply.set('status', status);
-        newApply.set('userId', Parse.User.current());
+        newApply.set('userID', Parse.User.current());
 
         // Actual saving the new recipe in Parse
         newApply.save().then(
