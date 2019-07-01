@@ -41,6 +41,31 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
 
         return async.promise;
     }
+    function getStatus (status) {
+      var statusStr = "";
+      switch (status) {
+          case '1':
+              statusStr = "פנייה במייל";
+              break;
+          case '2':
+              statusStr = "מוזמן לראיון";
+              break;
+          case '3':
+              statusStr = "לא מתאים";
+              break;
+          case '4':
+              statusStr = "מרכז הערכה";
+              break;
+          case '5':
+              statusStr = "מתאים";
+              break;
+          case '6':
+              statusStr = "תקן הוקפא";
+              break;
+          default:
+      }
+      return statusStr;
+  }
 
     function addApply(company, title, location, status) {
         var async = $q.defer();
@@ -71,7 +96,8 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
 
     return {
         getActiveUserApplies: getActiveUserApplies,
-        addApply: addApply
+        addApply: addApply,
+        getStatus: getStatus
     }
 
 });

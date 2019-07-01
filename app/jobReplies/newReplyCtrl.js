@@ -8,6 +8,7 @@ app.controller("newReplyCtrl", function($scope, appliesSrv, $log, $uibModalInsta
   
 
     $scope.addApply = function() {
+        $scope.status = $scope.value;
         appliesSrv.addApply($scope.company, $scope.title, $scope.location, $scope.status).then(function(newApply) {
             $log.info("new apply added: " + JSON.stringify(newApply));
 

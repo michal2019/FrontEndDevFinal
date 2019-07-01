@@ -2,7 +2,7 @@
     <div class="container">
         <h1>חיפושי העבודה שלי</h1>
         <!-- For Function Filter -->
-        <input class="form-control my-3" placeholder="סנן לפי שם חברה/תפקיד/מיקום/סטאטוס" ng-model="query">
+        <input class="form-control my-3" placeholder="סנן לפי שם חברה או תפקיד" ng-model="query">
 
         <table class="table" ng-hide="filteredApplies.length === 0">
             <thead>
@@ -21,7 +21,7 @@
                     <td>{{apply.company}}</td>
                     <td>{{apply.title}}</td>
                     <td>{{apply.location}}</td>
-                    <td>{{apply.status}}</td>
+                    <td>{{getStatus(apply.status)}}</td>
                 </tr>
             </tbody>
         </table>
@@ -29,7 +29,7 @@
         <button class="btn btn-primary mr-auto" ng-click="openNewApplyModal()">פנייה חדשה</button>
 
         <div class="my-pie" ng-if="applies">
-            <canvas id="pie" class="chart chart-pie" chart-data="getChartData()" chart-labels="labels" chart-options="options" chart-colors="colours"            >
+            <canvas id="pie" class="chart chart-pie" chart-data="getChartData()" chart-labels="labels" chart-options="options" chart-colors="colors"            >
             </canvas>
         </div>
     </div>

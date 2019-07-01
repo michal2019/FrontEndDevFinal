@@ -16,9 +16,7 @@ app.controller("jobRepliesCtrl", function ($scope, userSrv, $location, appliesSr
     $scope.filterApply = function (apply) {
         // converting to lower case to do a case insensitive comparison
         if (apply.company.toLowerCase().includes($scope.query.toLowerCase()) ||
-            apply.title.toLowerCase().includes($scope.query.toLowerCase()) ||
-            apply.location.toLowerCase().includes($scope.query.toLowerCase()) ||
-            apply.status.toLowerCase().includes($scope.query.toLowerCase())) {
+            apply.title.toLowerCase().includes($scope.query.toLowerCase())) {
             return true;
         } else {
             return false;
@@ -57,33 +55,61 @@ app.controller("jobRepliesCtrl", function ($scope, userSrv, $location, appliesSr
     }
 
     // Chart.JS
-
     var data = [];
-    $scope.labels = ["ראיונות", "חוסר התאמה"];
+    $scope.labels = ["פנייה במייל", "מוזמן לראיון", "לא מתאים", "מרכז הערכה", "מתאים", "תקן הוקפא"];
     $scope.options = {
         legend: {
             display: true
         }
     }
-    $scope.colours = ['#72C02C', '#3498DB'];
+    $scope.colors = ['#72C02C', '#3498DB', '#6ce7cf', '#11d7d8', '#998099', '#ffffd2'];
 
 
     $scope.getChartData = function () {
+        var mails = 0;
         var interviews = 0;
         var notAfit = 0;
+        var exams = 0;
+        var fits = 0;
+        var freezes = 0;
 
         for (var i = 0; i < $scope.applies.length; i++) {
-            if ($scope.applies[i].status.includes("ראיון")) {
-                interviews++;
-            } else {
-                notAfit++;
+            switch ($scope.applies[i].status) {
+                case '1':
+                    mails++;
+                    break;
+                case '2':
+                    interviews++;
+                    break;
+                case '3':
+                    notAfit++;
+                    break;
+                case '4':
+                    exams++;
+                    break;
+                case '5':
+                    fits++;
+                    break;
+                case '6':
+                    freezes++;
+                    break;
+                default:
             }
         }
 
-        data[0] = interviews;
-        data[1] = notAfit;
+        data[0] = mails;
+        data[1] = interviews;
+        data[2] = notAfit;
+        data[3] = exams;
+        data[4] = fits;
+        data[5] = freezes;
         return data;
     }
+    $scope.labels = ["פנייה במייל", "מוזמן לראיון", "לא מתאים", "מרכז הערכה", "מתאים", "תקן הוקפא"];
+    $scope.getStatus = function (status) {
+        return appliesSrv.getStatus(status);
+    }
+
 });
 
 // $scope.selectedCar = null;
