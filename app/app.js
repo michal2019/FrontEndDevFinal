@@ -1,4 +1,4 @@
-var app = angular.module("manageJobsApp", ["ngRoute", "ngImageInputWithPreview", "ngAnimate", "ngTouch", "ui.bootstrap"]);
+var app = angular.module("manageJobsApp", ["ngRoute", "ngImageInputWithPreview", "ngAnimate", "ngTouch", "ui.bootstrap", "chart.js"]);
 
 app.config(function ($routeProvider) {
 

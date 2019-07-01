@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                </tr> 
+                </tr>
                 <tr ng-repeat="apply in applies | filter : filterApply | orderBy : orderProp : orderReverse as filteredApplies">
                     <td>{{$index + 1}}</td>
                     <td>{{apply.company}}</td>
@@ -26,7 +26,11 @@
             </tbody>
         </table>
         <p class="text-center" ng-show="filteredApplies.length === 0">אין פניות מתאימות לסינון הנבחר</p>
-        <button class="btn btn-primary mr-auto" ng-click="openNewApplyModal()">פנייה חדשה</button> 
+        <button class="btn btn-primary mr-auto" ng-click="openNewApplyModal()">פנייה חדשה</button>
+
+        <div class="my-pie" ng-if="applies">
+            <canvas id="pie" class="chart chart-pie" chart-data="getChartData()" chart-labels="labels" chart-options="options" chart-colors="colours"            >
+            </canvas>
+        </div>
     </div>
 </div>
-<div>
