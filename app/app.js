@@ -31,6 +31,9 @@ app.config(function ($routeProvider) {
     }).when("/jobReplies/", {
       templateUrl: "app/jobReplies/jobReplies.html",
       controller: "jobRepliesCtrl"
-    })
+    }).when("/jobReplies/:id", {
+        templateUrl: "app/jobReplies/updateOrDeleteReply.html",
+        controller: "updateOrDeleteReplyCtrl"
+      });
 });
 

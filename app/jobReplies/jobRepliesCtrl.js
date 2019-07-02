@@ -110,22 +110,33 @@ app.controller("jobRepliesCtrl", function ($scope, userSrv, $location, appliesSr
         return appliesSrv.getStatus(status);
     }
 
+    $scope.selectedApply = null;
+    $scope.onSelectApply = function (apply) {
+        if ($scope.selectedApply === apply) {
+            $scope.selectedApply = null;
+        } else {
+            $scope.selectedApply = apply;
+        }
+        $scope.openUpdateApplyModal($scope.selectedApply);
+    }
+
+    $scope.openUpdateApplyModal = function (selectedApply) {
+        var index = $scope.applies.indexOf(selectedApply);
+        $location.path("/jobReplies/" + index);
+        // var modalInstance = $uibModal.open({
+        //     templateUrl: "app/jobReplies/updateOrDeleteReply.html",
+        //     controller: "updateOrDeleteReplyCtrl"   
+        // });
+        // modalInstance.result.then(function (updateApply) {
+        //     // this will wake in case the user updated apply
+        //     $scope.applies.push(updateApply);
+        // }, function () {
+        //     // this will wake up in case the user canceled the new apply
+        //     console.log("user canceled update apply");
+        // })
+    }
+
 });
 
-// $scope.selectedCar = null;
-// $scope.onSelectCar = function(car) {
-//   if ($scope.selectedCar === car) {
-//     $scope.selectedCar = null;
-//   } else {
-//     $scope.selectedCar = car;
-//   }
-// }
 
-// $scope.openCarDetails = function(car) {
 
-//   var index = $scope.cars.indexOf(car);
-//   $location.path("/cars/" + index);
-
-// }
-
-// // $scope.classes = ["red", "bg-blue"];

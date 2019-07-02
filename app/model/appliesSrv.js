@@ -1,5 +1,5 @@
 
-app.factory("appliesSrv", function($q, $http, userSrv) {
+app.factory("appliesSrv", function ($q, $http, userSrv) {
 
     // All of these variables are a hack becasue we don't have a server side
     // mianitng all the applies in the memory
@@ -29,43 +29,62 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
 
         // Executing the query
         query.find().then((results) => {
-          console.log('Apply found', results);
-          for (let index = 0; index < results.length; index++) {
-              applies.push(new Apply(results[index]));
-          }
-          async.resolve(applies);
+            console.log('Apply found', results);
+            for (let index = 0; index < results.length; index++) {
+                applies.push(new Apply(results[index]));
+            }
+            async.resolve(applies);
         }, (error) => {
-          console.error('Error while fetching Recipe', error);
-          async.reject(error);
+            console.error('Error while fetching Recipe', error);
+            async.reject(error);
         });
 
         return async.promise;
     }
-    function getStatus (status) {
-      var statusStr = "";
-      switch (status) {
-          case '1':
-              statusStr = "פנייה במייל";
-              break;
-          case '2':
-              statusStr = "מוזמן לראיון";
-              break;
-          case '3':
-              statusStr = "לא מתאים";
-              break;
-          case '4':
-              statusStr = "מרכז הערכה";
-              break;
-          case '5':
-              statusStr = "מתאים";
-              break;
-          case '6':
-              statusStr = "תקן הוקפא";
-              break;
-          default:
-      }
-      return statusStr;
-  }
+
+    // Returning (with a promise) a single apply by its index in the array
+    function getApplyByIndex(index) {
+        var async = $q.defer();
+
+        // Getting all the applies and returning a single apply by its index in the array
+        getActiveUserApplies().then(function (applies) {
+            if (index >= applies.length) {
+                async.reject("Index out of bounds")
+            }
+
+            async.resolve(applies[index]);
+        }, function (err) {
+            async.reject(err);
+        })
+
+        return async.promise;
+    }
+
+    function getStatus(status) {
+        var statusStr = "";
+        switch (status) {
+            case '1':
+                statusStr = "פנייה במייל";
+                break;
+            case '2':
+                statusStr = "מוזמן לראיון";
+                break;
+            case '3':
+                statusStr = "לא מתאים";
+                break;
+            case '4':
+                statusStr = "מרכז הערכה";
+                break;
+            case '5':
+                statusStr = "מתאים";
+                break;
+            case '6':
+                statusStr = "תקן הוקפא";
+                break;
+            default:
+        }
+        return statusStr;
+    }
 
     function addApply(company, title, location, status) {
         var async = $q.defer();
@@ -81,23 +100,60 @@ app.factory("appliesSrv", function($q, $http, userSrv) {
 
         // Actual saving the new recipe in Parse
         newApply.save().then(
-          function (result) {
-            console.log('Apply created', result);
-            async.resolve(new Apply(result));
-          },
-          function (error) {
-            console.error('Error while creating Apply: ', error);
-            async.reject(error);
-          }
+            function (result) {
+                console.log('Apply created', result);
+                async.resolve(new Apply(result));
+            },
+            function (error) {
+                console.error('Error while creating Apply: ', error);
+                async.reject(error);
+            }
         );
 
         return async.promise;
     }
 
+    function updateApply(applyId, company, title, location, status) {
+        const jobReply = Parse.Object.extend('jobReply');
+        const query = new Parse.Query(jobReply);
+        query.get(applyId).then(function (object){
+            object.set('company', company);
+            object.set('title', title);
+            object.set('location', location);
+            object.set('userID', Parse.User.current());
+            object.set('status', status);
+            object.save().then(function(response) {
+                if (typeof document !== 'undefined') document.write(`Updated jobReply: ${JSON.stringify(response)}`);
+                console.log('Updated jobReply', response);
+            }, (error) => {
+                if (typeof document !== 'undefined') document.write(`Error while updating jobReply: ${JSON.stringify(error)}`);
+                console.error('Error while updating jobReply', error);
+            });
+        });
+    }
+
+    function deleteApply(apply) {
+        const jobReply = Parse.Object.extend('jobReply');
+        const query = new Parse.Query(jobReply);
+        // here you put the objectId that you want to delete
+        query.get(apply.id).then(function(object){
+            object.destroy().then(function(response){
+                if (typeof document !== 'undefined') document.write(`Deleted jobReply: ${JSON.stringify(response)}`);
+                console.log('Deleted jobReply', response);
+            }, (error) => {
+                if (typeof document !== 'undefined') document.write(`Error while deleting jobReply: ${JSON.stringify(error)}`);
+                console.error('Error while deleting jobReply', error);
+            });
+        });
+    }
+
     return {
         getActiveUserApplies: getActiveUserApplies,
         addApply: addApply,
-        getStatus: getStatus
+        getStatus: getStatus,
+        updateApply: updateApply,
+        deleteApply: deleteApply,
+        getApplyByIndex: getApplyByIndex
     }
 
 });

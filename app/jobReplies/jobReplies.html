@@ -16,7 +16,8 @@
             </thead>
             <tbody>
                 </tr>
-                <tr ng-repeat="apply in applies | filter : filterApply | orderBy : orderProp : orderReverse as filteredApplies">
+                <tr ng-repeat="apply in applies | filter : filterApply | orderBy : orderProp : orderReverse as filteredApplies"
+                    ng-click="onSelectApply(apply)">
                     <td>{{$index + 1}}</td>
                     <td>{{apply.company}}</td>
                     <td>{{apply.title}}</td>
