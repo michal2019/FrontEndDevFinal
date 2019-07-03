@@ -14,13 +14,17 @@ app.controller("jobRepliesCtrl", function ($scope, userSrv, $location, appliesSr
 
     $scope.query = "";
     $scope.filterApply = function (apply) {
-        // converting to lower case to do a case insensitive comparison
-        if (apply.company.toLowerCase().includes($scope.query.toLowerCase()) ||
-            apply.title.toLowerCase().includes($scope.query.toLowerCase())) {
-            return true;
-        } else {
-            return false;
+        if ($scope.query) {
+            // converting to lower case to do a case insensitive comparison
+            if (apply.company.toLowerCase().includes($scope.query.toLowerCase()) ||
+                apply.title.toLowerCase().includes($scope.query.toLowerCase())) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        else {
+           return true;}
     }
 
     $scope.orderProp = "";
@@ -110,30 +114,25 @@ app.controller("jobRepliesCtrl", function ($scope, userSrv, $location, appliesSr
         return appliesSrv.getStatus(status);
     }
 
-    $scope.selectedApply = null;
     $scope.onSelectApply = function (apply) {
-        if ($scope.selectedApply === apply) {
-            $scope.selectedApply = null;
-        } else {
-            $scope.selectedApply = apply;
-        }
-        $scope.openUpdateApplyModal($scope.selectedApply);
+        $scope.openUpdateApplyModal(apply);
     }
 
     $scope.openUpdateApplyModal = function (selectedApply) {
         var index = $scope.applies.indexOf(selectedApply);
-        $location.path("/jobReplies/" + index);
-        // var modalInstance = $uibModal.open({
-        //     templateUrl: "app/jobReplies/updateOrDeleteReply.html",
-        //     controller: "updateOrDeleteReplyCtrl"   
-        // });
-        // modalInstance.result.then(function (updateApply) {
-        //     // this will wake in case the user updated apply
-        //     $scope.applies.push(updateApply);
-        // }, function () {
-        //     // this will wake up in case the user canceled the new apply
-        //     console.log("user canceled update apply");
-        // })
+        // $location.path("/jobReplies/" + index);
+        var modalInstance = $uibModal.open({
+            templateUrl: "app/jobReplies/updateOrDeleteReply.html",
+            controller: "updateOrDeleteReplyCtrl",
+            resolve: {
+                selectedApply: selectedApply
+            }
+        });
+        modalInstance.result.then(function (updateApply) {
+        }, function () {
+            // this will wake up in case the user canceled the new apply
+            console.log("user canceled update apply");
+        })
     }
 
 });

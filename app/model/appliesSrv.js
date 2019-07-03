@@ -114,37 +114,40 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
     }
 
     function updateApply(applyId, company, title, location, status) {
+        var async = $q.defer();
         const jobReply = Parse.Object.extend('jobReply');
         const query = new Parse.Query(jobReply);
-        query.get(applyId).then(function (object){
+        query.get(applyId).then(function (object) {
             object.set('company', company);
             object.set('title', title);
             object.set('location', location);
             object.set('userID', Parse.User.current());
             object.set('status', status);
-            object.save().then(function(response) {
-                if (typeof document !== 'undefined') document.write(`Updated jobReply: ${JSON.stringify(response)}`);
+            object.save().then(function (response) {
                 console.log('Updated jobReply', response);
+                async.resolve(new Apply(response));
             }, (error) => {
-                if (typeof document !== 'undefined') document.write(`Error while updating jobReply: ${JSON.stringify(error)}`);
                 console.error('Error while updating jobReply', error);
+                async.reject(error);
             });
         });
+        return async.promise;
     }
 
     function deleteApply(apply) {
+        var async = $q.defer();
         const jobReply = Parse.Object.extend('jobReply');
         const query = new Parse.Query(jobReply);
-        // here you put the objectId that you want to delete
-        query.get(apply.id).then(function(object){
-            object.destroy().then(function(response){
-                if (typeof document !== 'undefined') document.write(`Deleted jobReply: ${JSON.stringify(response)}`);
+        query.get(apply.id).then(function (object) {
+            object.destroy().then(function (response) {
                 console.log('Deleted jobReply', response);
+                async.resolve(new Apply(response));
             }, (error) => {
-                if (typeof document !== 'undefined') document.write(`Error while deleting jobReply: ${JSON.stringify(error)}`);
                 console.error('Error while deleting jobReply', error);
+                async.reject(error);
             });
         });
+        return async.promise;
     }
 
     return {
