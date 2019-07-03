@@ -1,4 +1,4 @@
-<div class="login col-sm-12 text-center" >
+<div class="login col-sm-12 text-center">
     <h1>כניסה לאפליקציית ניהול חיפושי עבודה</h1>
     <p>או <a href="#!/signup">יצירת חשבון</a></p>
     <div class="alert alert-danger" role="alert" ng-show="invalidLogin">
@@ -7,11 +7,13 @@
     <form class="col-sm-8">
         <div class="form-group">
             <label for="email">כתובת מייל: </label>
-            <input type="email" class="form-control english-direction" id="email" ng-model="email" placeholder="mail address">
+            <input type="email" class="form-control english-direction" id="email" ng-model="email"
+                placeholder="mail address">
         </div>
         <div class="form-group">
             <label for="pwd"> סיסמה: </label>
-            <input type="password" class="form-control english-direction" id="pwd" ng-model="pwd" placeholder="password">
+            <input type="password" class="form-control english-direction" id="pwd" ng-model="pwd"
+                placeholder="password">
         </div>
         <button type="button" class="btn btn-block bg-dark text-white" ng-click="login()">כנס/י</button>
     </form>

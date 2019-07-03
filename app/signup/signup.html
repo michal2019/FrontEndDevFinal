@@ -1,0 +1,21 @@
+<div class="login col-sm-12 text-center">
+    <h1>יצירת חשבון</h1>
+    <form class="col-sm-8">
+        <div class="form-group">
+            <label for="text">שם משתמש: </label>
+            <input type="text" class="form-control english-direction" id="username" ng-model="username"
+                placeholder="user name">
+        </div>
+        <div class="form-group">
+            <label for="email">כתובת מייל: </label>
+            <input type="email" class="form-control english-direction" id="email" ng-model="email"
+                placeholder="mail address">
+        </div>
+        <div class="form-group">
+            <label for="pwd"> סיסמה: </label>
+            <input type="password" class="form-control english-direction" id="pwd" ng-model="pwd"
+                placeholder="password">
+        </div>
+        <button type="button" class="btn btn-block bg-dark text-white" ng-click="signUp()">כנס/י</button>
+    </form>
+</div>
