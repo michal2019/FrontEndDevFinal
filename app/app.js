@@ -25,6 +25,9 @@ app.config(function ($routeProvider) {
     }).when("/tips/cvtips", {
       templateUrl: "app/tips/cvtips.html",
       controller: "tipsCtrl"
+    }).when("/recommendations/", {
+      templateUrl: "app/recommendations/recommendations.html",
+      // controller: "recommendationsCtrl"
     }).when("/main", {
       templateUrl: "app/main/main.html",
       controller: "mainCtrl"

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light" style="background-color: #e3f2fd;">
   <a class="navbar-brand" href="#">ניהול חיפושי עבודה</a>
-  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -12,23 +12,14 @@
       <li uib-dropdown class="nav-item dropdown">
         <a uib-dropdown-toggle class="nav-link dropdown-toggle" data-toggle="dropdown" href="#!/tips">טיפים</a>
         <div class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-          <a class="dropdown-item" href="#">Link 1</a>
-          <a class="dropdown-item" href="#">Link 2</a>
-          <a class="dropdown-item" href="#">Link 3</a></div>
+          <a class="dropdown-item" href="#!/tips/searchtips">טיפים לחיפוש עבודה</a>
+          <a class="dropdown-item" href="#!/tips/cvtips">טיפים לכתיבת קו"ח</a>
       </li>
-      <li uib-dropdown class="nav-item dropdown">
-        <a uib-dropdown-toggle class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">המלצות</a>
-        <div class="dropdown-menu" uib-dropdown-menu aria-labelledby="single-button">
-          <a class="dropdown-item" href="#">Link 1</a>
-          <a class="dropdown-item" href="#">Link 2</a>
-          <a class="dropdown-item" href="#">Link 3</a></div>
+      <li class="nav-item">
+        <a class="nav-link" href="#!/recommendations">המלצות</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#!/jobReplies">פניות</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Link 1</a>
-          <a class="dropdown-item" href="#">Link 2</a>
-          <a class="dropdown-item" href="#">Link 3</a></div>
+      <li class="nav-item">
+        <a class="nav-link" href="#!/jobReplies">פניות</a>
       </li>
     </ul>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -36,5 +27,5 @@
         <a class="nav-link" href="#" ng-show=isLoggedIn() ng-click="logout()">יציאה</a>
       </li>
     </ul>
-  </div>
+    </div>
 </nav>
