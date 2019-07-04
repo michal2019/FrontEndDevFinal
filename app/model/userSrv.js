@@ -1,9 +1,8 @@
 app.factory("userSrv", function ($q) {
 
-        var activeUser = null;
+    var activeUser = null;
 
-    if(Parse.User.current())
-    {
+    if (Parse.User.current()) {
         activeUser = new User(Parse.User.current());
     }
 
@@ -18,7 +17,7 @@ app.factory("userSrv", function ($q) {
         return activeUser ? true : false;
     }
 
-    function signUp(username, email, pwd){
+    function signUp(username, email, pwd) {
         var async = $q.defer();
         const user = new Parse.User()
         user.set('username', username);

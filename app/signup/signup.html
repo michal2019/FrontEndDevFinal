@@ -1,5 +1,8 @@
 <div class="login col-sm-12 text-center">
     <h1>יצירת חשבון</h1>
+    <div class="alert alert-danger" role="alert" ng-show="invalidLogin">
+        <strong>רישום שגוי!</strong> יש להזין שם משתמש, אימייל וסיסמה
+    </div>
     <form class="col-sm-8">
         <div class="form-group">
             <label for="text">שם משתמש: </label>

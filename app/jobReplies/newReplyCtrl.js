@@ -1,6 +1,7 @@
 
 app.controller("newReplyCtrl", function ($scope, appliesSrv, $log, $uibModalInstance) {
 
+    $scope.invalidApply = false;
     $scope.company = "";
     $scope.title = "";
     $scope.location = "";
@@ -17,7 +18,8 @@ app.controller("newReplyCtrl", function ($scope, appliesSrv, $log, $uibModalInst
                 $uibModalInstance.close(newApply);
             });    
         } else {
-            alert("מלא שם חברה, תפקיד וסטאטוס!!!");
+            // alert("מלא שם חברה, תפקיד וסטאטוס!!!");
+            $scope.invalidApply = true;
         }
     }
 
@@ -28,6 +30,20 @@ app.controller("newReplyCtrl", function ($scope, appliesSrv, $log, $uibModalInst
         $scope.location = "";
         $scope.status = "";
         $uibModalInstance.dismiss();
+    }
+
+
+    $scope.invalidLogin = false;
+    $scope.email = "michal.rechler@gmail.com";
+    $scope.pwd = "12345";
+
+    $scope.login = function () {
+        userSrv.login($scope.email, $scope.pwd).then(function (activeUser) {
+            $log.info("Successful login with: " + JSON.stringify(activeUser));
+            $location.path("/main");
+        }, function (err) {
+            $scope.invalidLogin = true;
+        });
     }
 
 })

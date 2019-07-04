@@ -6,11 +6,16 @@ app.controller("loginCtrl", function ($scope, $location, $log, userSrv) {
     $scope.pwd = "12345";
 
     $scope.login = function () {
-        userSrv.login($scope.email, $scope.pwd).then(function (activeUser) {
-            $log.info("Successful login with: " + JSON.stringify(activeUser));
-            $location.path("/main");
-        }, function (err) {
+        if ($scope.email && $scope.pwd) {
+            userSrv.login($scope.email, $scope.pwd).then(function (activeUser) {
+                $log.info("Successful login with: " + JSON.stringify(activeUser));
+                $location.path("/main");
+            }, function (err) {
+                $scope.invalidLogin = true;
+            });
+        }
+        else {
             $scope.invalidLogin = true;
-        });
+        }
     }
 })

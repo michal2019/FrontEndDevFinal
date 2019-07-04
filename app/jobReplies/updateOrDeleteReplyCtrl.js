@@ -7,6 +7,7 @@ app.controller("updateOrDeleteReplyCtrl", function ($scope, $log, appliesSrv, $u
     // }, function (err) {
     //     $log.error(err);
     // });
+    $scope.invalidApply = false;
 
     $scope.currentApply = $scope.$resolve.selectedApply;
 
@@ -23,7 +24,8 @@ app.controller("updateOrDeleteReplyCtrl", function ($scope, $log, appliesSrv, $u
                 $uibModalInstance.close(deleteConfirm);
             });
         } else {
-            alert("מלא שם חברה, תפקיד וסטאטוס!!!");
+            // alert("מלא שם חברה, תפקיד וסטאטוס!!!");
+            $scope.invalidApply = true;
         }
     }
 
