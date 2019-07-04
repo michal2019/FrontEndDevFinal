@@ -11,13 +11,13 @@
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label"> חברה</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="company" placeholder=""  ng-model="currentApply.company">
+                    <input type="text" class="form-control" id="company" placeholder=""  ng-model="currentApply.company"  required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="desc" class="col-sm-2 col-form-label"> תפקיד</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title" placeholder="" ng-model="currentApply.title">
+                    <input type="text" class="form-control" id="title" placeholder="" ng-model="currentApply.title"  required>
                 </div>
             </div>
             <div class="form-group row">
@@ -30,7 +30,7 @@
                 <!-- Split dropleft button -->
                 <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <label class="input-group-text" for="inputGroupSelect01">מצב פניה</label>
+                          <label class="input-group-text" for="inputGroupSelect01"  required>מצב פניה</label>
                         </div>
                         <select class="custom-select" id="status" ng-model="currentApply.status">
                           <option selected>בחר/י</option>

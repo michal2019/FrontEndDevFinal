@@ -128,7 +128,11 @@ app.controller("jobRepliesCtrl", function ($scope, userSrv, $location, appliesSr
                 selectedApply: selectedApply
             }
         });
-        modalInstance.result.then(function (updateApply) {
+        modalInstance.result.then(function (deleteConfirm) {
+        if(deleteConfirm) 
+        {
+            $scope.applies.splice(index, 1);
+        }  
         }, function () {
             // this will wake up in case the user canceled the new apply
             console.log("user canceled update apply");

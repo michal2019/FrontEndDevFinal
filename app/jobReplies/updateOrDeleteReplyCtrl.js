@@ -15,19 +15,25 @@ app.controller("updateOrDeleteReplyCtrl", function ($scope, $log, appliesSrv, $u
     }
 
     $scope.updateApply = function () {
-        appliesSrv.updateApply($scope.currentApply.id, $scope.currentApply.company, $scope.currentApply.title, $scope.currentApply.location, $scope.currentApply.status).then(function (updatedApply) {
-            $log.info("Apply updated: " + JSON.stringify(updatedApply));
-            // Closing the modal
-            $uibModalInstance.close(updatedApply);
-        });
-
+        if ($scope.currentApply.company && $scope.currentApply.title && $scope.currentApply.status) {
+            appliesSrv.updateApply($scope.currentApply.id, $scope.currentApply.company, $scope.currentApply.title, $scope.currentApply.location, $scope.currentApply.status).then(function (updatedApply) {
+                $log.info("Apply updated: " + JSON.stringify(updatedApply));
+                // Closing the modal
+                var deleteConfirm = false;
+                $uibModalInstance.close(deleteConfirm);
+            });
+        } else {
+            alert("מלא שם חברה, תפקיד וסטאטוס!!!");
+        }
     }
 
     $scope.deleteApply = function () {
         appliesSrv.deleteApply($scope.currentApply).then(function (deletedApply) {
             $log.info("Apply deleted: " + JSON.stringify(deletedApply));
-            // Closing the modal
-            $uibModalInstance.close(deletedApply);
+            // Closing the modal with flag
+            var deleteConfirm = true;
+            $uibModalInstance.close(deleteConfirm);
+            // $uibModalInstance.close(deletedApply);
         });
     }
 });

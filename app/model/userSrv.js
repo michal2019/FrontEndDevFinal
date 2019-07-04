@@ -1,6 +1,11 @@
 app.factory("userSrv", function ($q) {
 
-    var activeUser = null;
+        var activeUser = null;
+
+    if(Parse.User.current())
+    {
+        activeUser = new User(Parse.User.current());
+    }
 
     function User(parseUser) {
         this.id = parseUser.id;
