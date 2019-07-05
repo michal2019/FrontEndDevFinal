@@ -1,12 +1,8 @@
 
 app.factory("appliesSrv", function ($q, $http, userSrv) {
-
-    // All of these variables are a hack becasue we don't have a server side
-    // mianitng all the applies in the memory
     var applies = {};   // key is userId and value is an array of the user's applies
     var nextApplieId;
 
-    // New ES6 syntax for creating a constructor
     class Apply {
         constructor(parseApply) {
             this.id = parseApply.id;

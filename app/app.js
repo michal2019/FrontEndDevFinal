@@ -5,6 +5,7 @@ app.config(function ($routeProvider) {
   $routeProvider.
     when("/", {
       templateUrl: "app/home/home.html",
+      controller: "homeCtrl"
     }).when("/about", {
       templateUrl: "app/home/about.html",
     }).when("/login", {
@@ -27,10 +28,8 @@ app.config(function ($routeProvider) {
       controller: "tipsCtrl"
     }).when("/recommendations/", {
       templateUrl: "app/recommendations/recommendations.html",
-      // controller: "recommendationsCtrl"
     }).when("/main", {
       templateUrl: "app/main/main.html",
-      controller: "mainCtrl"
     }).when("/jobReplies/", {
       templateUrl: "app/jobReplies/jobReplies.html",
       controller: "jobRepliesCtrl"

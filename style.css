@@ -15,16 +15,11 @@ form{
     height: 100%;
   }
   .bg {
-    /* The image used */
-    /* background-image: url("https://wp.jsstatic.com/wp-content/uploads/sites/3/2018/12/person-using-macbook-pro.jpeg"); */
     background-image: url("https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80");
   }
 
   .bgmain {
-    /* The image used */
     background-image: url("https://cdn.pixabay.com/photo/2016/12/18/10/21/application-1915348_960_720.jpg");
-    /* background-image: url("https://www.naukrigulf.com/career-tips/wp-content/uploads/2017/11/Job-Offer-Acceptance-Email.jpg"); */
-    /* background-image: url("https://live.staticflickr.com/4562/37969907095_a6da2940cb_b.jpg"); */
   }
 
   .bg , .bgmain{
