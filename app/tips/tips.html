@@ -1,9 +1,13 @@
-<main-navbar ng-show=isLoggedIn()></main-navbar>
-<managejobs-navbar  ng-hide=isLoggedIn()></managejobs-navbar>
-<div class="tips col-sm-12 text-center" >
+<div class="bgTips">
+    <main-navbar ng-show=isLoggedIn()></main-navbar>
+    <managejobs-navbar ng-hide=isLoggedIn()></managejobs-navbar>
+    <div class="col-sm-12 text-center">
         <h1>טיפים למחפש עבודה</h1>
-        <form class="col-sm-4">
-            <button type="button" class="btn btn-primary btn-lg btn-block bg-dark text-white" ng-click="searchTips()">טיפים לחיפוש עבודה</button>
-            <button type="button" class="btn btn-primary btn-lg btn-block bg-dark text-white" ng-click="cvTips()">טיפים לכתיבת קו"ח</button>
+        <form class="col-sm-5">
+            <button type="button" class="btn btn-primary btn-lg btn-block bg-dark text-white"
+                ng-click="searchTips()">טיפים לחיפוש עבודה</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block bg-dark text-white" 
+                ng-click="cvTips()">טיפים לכתיבת קו"ח</button>
         </form>
     </div>
+</div>
