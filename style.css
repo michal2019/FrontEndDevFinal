@@ -40,4 +40,9 @@ form{
     width: 70%;
     margin: auto;
   }
+
+  .notifications{
+    /* background-color:red; */
+    color: red !important;
+  }
  

@@ -10,6 +10,7 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
             this.title = parseApply.get("title");
             this.location = parseApply.get("location");
             this.status = parseApply.get("status");
+            this.updateTime = parseApply.get("updatedAt");
         }
     }
 
@@ -121,7 +122,9 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
             object.set('status', status);
             object.save().then(function (response) {
                 console.log('Updated jobReply', response);
-                async.resolve(new Apply(response));
+                var updatedApply = new Apply(response);
+                updatedApply.updateTime = new Date();
+                async.resolve(updatedApply);
             }, (error) => {
                 console.error('Error while updating jobReply', error);
                 async.reject(error);
