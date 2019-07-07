@@ -30,6 +30,7 @@ app.controller("jobNotificationsCtrl", function ($scope, appliesSrv, $uibModal) 
 
     $scope.formatDate = function(d)
     {
+        console.log($scope.userNotifications);
         var dateString = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
         return dateString;
     }

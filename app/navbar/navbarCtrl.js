@@ -1,5 +1,5 @@
 
-app.controller("navbarCtrl", function ($scope, userSrv, $location, appliesSrv) {
+app.controller("navbarCtrl", function ($scope, userSrv, $location, appliesSrv, $q, $http) {
 
     $scope.isLoggedIn = function () {
         return userSrv.isLoggedIn();
@@ -19,21 +19,37 @@ app.controller("navbarCtrl", function ($scope, userSrv, $location, appliesSrv) {
         });
     }
 
+    function getNotificationMs() {
+        var async = $q.defer();
+
+        $http.get("app/data/app.json").then(function (res) {
+            // on success
+            async.resolve(res.data.update_timeout_in_ms);
+        }, function (err) {
+            $log.error(err);
+            async.reject(err);
+        });
+
+        return async.promise;
+    }
+
+
     $scope.userAsnotifications = false;
     $scope.userNotifications = [];
     updateUserNotification = function (userApplies) {
         var currentTime = new Date().getTime();
-        for (var i = 0; i < userApplies.length; i++) {
-            let updateTime = userApplies[i].updateTime.getTime();
-            if (currentTime - updateTime > 259200000) { //notification after 3 day not updated in ms
-                $scope.userNotifications.push(userApplies[i]);
+        getNotificationMs().then(function (ms) {
+            for (var i = 0; i < userApplies.length; i++) {
+                let updateTime = userApplies[i].updateTime.getTime();
+                if (currentTime - updateTime > ms) { //notification after 3 day not updated in ms
+                    $scope.userNotifications.push(userApplies[i]);
+                }
+                if ($scope.userNotifications.length > 0) {
+                    $scope.userAsnotifications = true;
+                }
             }
-        }
-        if ($scope.userNotifications.length > 0) {
-            $scope.userAsnotifications = true;
-        }
+        }, function (err) {
+            $log.error(err);
+        });
     }
-
-
-
 })
