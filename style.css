@@ -45,4 +45,17 @@ form{
     /* background-color:red; */
     color: red !important;
   }
+
+.nav-item{
+  font-size: 1.5em;
+}
+
+.navbar-brand{
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.applies{
+  font-size: 1.2em;
+}
  
