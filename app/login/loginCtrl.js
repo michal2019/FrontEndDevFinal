@@ -1,6 +1,5 @@
 
-app.controller("loginCtrl", function ($scope, $location, $log, userSrv) {
-
+app.controller("loginCtrl", function ($scope, $location, $log, userSrv, $uibModal) {
     $scope.invalidLogin = false;
     $scope.email = "";
     $scope.pwd = "";
@@ -19,4 +18,20 @@ app.controller("loginCtrl", function ($scope, $location, $log, userSrv) {
             $scope.invalidLogin = true;
         }
     }
+
+    $scope.resetPassword = function () {
+        $scope.email = "";
+        $scope.pwd = "";
+        var modalInstance = $uibModal.open({
+            templateUrl: "app/login/resetPassword.html",
+            controller: "resetPwdModalCtrl"
+        })
+
+        modalInstance.result.then(function (User) {
+            // $location.path("/main");
+            $scope.users.push(activeUser);
+        }, function () {
+            console.log("user canceled reset Password");
+        })
+    };
 })

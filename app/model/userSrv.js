@@ -18,6 +18,7 @@ app.factory("userSrv", function ($q) {
     }
 
     function signUp(username, email, pwd) {
+        activeUser = null;
         var async = $q.defer();
         const user = new Parse.User()
         user.set('username', username);
@@ -68,12 +69,28 @@ app.factory("userSrv", function ($q) {
         return activeUser;
     }
 
+    function resetPassword(email) {
+        activeUser = null;
+        var async = $q.defer();
+        Parse.User.requestPasswordReset(email).then(function () {
+            console.log("Password reset request was sent successfully");
+            async.resolve(activeUser);
+        }).catch(function (error) {
+            console.log("The login failed with error: " + error.code + " " + error.message);
+            async.reject(error);
+        });
+
+        return async.promise;
+    }
+
+
     return {
         isLoggedIn: isLoggedIn,
         login: login,
         logout: logout,
         getActiveUser: getActiveUser,
-        signUp: signUp
+        signUp: signUp,
+        resetPassword: resetPassword
     }
 
 });
