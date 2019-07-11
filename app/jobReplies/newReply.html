@@ -11,7 +11,8 @@
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label"> חברה</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="company" placeholder="הכנס/י שם חברה" ng-model="company">
+                    <input type="text" class="form-control" id="company" placeholder="הכנס/י שם חברה"
+                        ng-model="company">
                 </div>
             </div>
             <div class="form-group row">
@@ -23,25 +24,29 @@
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label"> מיקום</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="location" placeholder="הכנס/י מיקום משרה" ng-model="location">
+                    <input type="text" class="form-control" id="location" placeholder="הכנס/י מיקום משרה"
+                        ng-model="location">
                 </div>
             </div>
             <div class="form-group row">
                 <!-- Split dropleft button -->
                 <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <label class="input-group-text" for="inputGroupSelect01">מצב פניה</label>
-                        </div>
-                        <select class="custom-select" id="status" ng-model="value">
-                          <!-- <option selected>בחר/י</option> -->
-                          <option value="1">פנייה במייל</option>
-                          <option value="2">מוזמן לראיון</option>
-                          <option value="3">לא מתאים</option>
-                          <option value="4">מרכז הערכה</option>
-                          <option value="5">מתאים</option>
-                          <option value="6">תקן הוקפא</option>
-                        </select>
-                      </div>
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">מצב פניה</label>
+                    </div>
+                    <select class="custom-select" id="status" ng-model="value">
+                        <!-- <option selected>בחר/י</option> -->
+                        <option value="1">פנייה במייל</option>
+                        <option value="2">מוזמן לראיון</option>
+                        <option value="3">לא מתאים</option>
+                        <option value="4">מרכז הערכה</option>
+                        <option value="5">מתאים</option>
+                        <option value="6">תקן הוקפא</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <textarea rows="4" cols="40" ng-model="comment" placeholder="כתוב הערתך כאן"></textarea>
             </div>
         </form>
 

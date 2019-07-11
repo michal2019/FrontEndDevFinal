@@ -11,7 +11,7 @@ app.controller("newReplyCtrl", function ($scope, appliesSrv, $log, $uibModalInst
     $scope.addApply = function () {
         $scope.status = $scope.value;
         if ($scope.company && $scope.title && $scope.status) {
-            appliesSrv.addApply($scope.company, $scope.title, $scope.location, $scope.status).then(function (newApply) {
+            appliesSrv.addApply($scope.company, $scope.title, $scope.location, $scope.status, $scope.comment).then(function (newApply) {
                 $log.info("new apply added: " + JSON.stringify(newApply));
     
                 // Closing the modal
@@ -29,13 +29,9 @@ app.controller("newReplyCtrl", function ($scope, appliesSrv, $log, $uibModalInst
         $scope.title = "";
         $scope.location = "";
         $scope.status = "";
+        $scope.comment = "";
         $uibModalInstance.dismiss();
     }
-
-
-    $scope.invalidLogin = false;
-    $scope.email = "michal.rechler@gmail.com";
-    $scope.pwd = "12345";
 
     $scope.login = function () {
         userSrv.login($scope.email, $scope.pwd).then(function (activeUser) {

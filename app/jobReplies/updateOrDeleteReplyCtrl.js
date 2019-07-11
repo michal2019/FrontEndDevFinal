@@ -17,7 +17,7 @@ app.controller("updateOrDeleteReplyCtrl", function ($scope, $log, appliesSrv, $u
 
     $scope.updateApply = function () {
         if ($scope.currentApply.company && $scope.currentApply.title && $scope.currentApply.status) {
-            appliesSrv.updateApply($scope.currentApply.id, $scope.currentApply.company, $scope.currentApply.title, $scope.currentApply.location, $scope.currentApply.status).then(function (updatedApply) {
+            appliesSrv.updateApply($scope.currentApply.id, $scope.currentApply.company, $scope.currentApply.title, $scope.currentApply.location, $scope.currentApply.status, $scope.currentApply.comment).then(function (updatedApply) {
                 $log.info("Apply updated: " + JSON.stringify(updatedApply));
                 // Closing the modal
                 var deleteConfirm = false;

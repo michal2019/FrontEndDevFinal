@@ -11,6 +11,7 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
             this.location = parseApply.get("location");
             this.status = parseApply.get("status");
             this.updateTime = parseApply.get("updatedAt");
+            this.comment = parseApply.get("comment");
         }
     }
 
@@ -32,7 +33,7 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
             }
             async.resolve(applies);
         }, (error) => {
-            console.error('Error while fetching Recipe', error);
+            console.error('Error', error);
             async.reject(error);
         });
 
@@ -83,7 +84,7 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
         return statusStr;
     }
 
-    function addApply(company, title, location, status) {
+    function addApply(company, title, location, status ,comment) {
         var async = $q.defer();
 
         // Preparing the new parse recipe object to save
@@ -94,6 +95,7 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
         newApply.set('location', location);
         newApply.set('status', status);
         newApply.set('userID', Parse.User.current());
+        newApply.set('comment', comment);
 
         // Actual saving the new recipe in Parse
         newApply.save().then(
@@ -110,7 +112,7 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
         return async.promise;
     }
 
-    function updateApply(applyId, company, title, location, status) {
+    function updateApply(applyId, company, title, location, status, comment) {
         var async = $q.defer();
         const jobReply = Parse.Object.extend('jobReply');
         const query = new Parse.Query(jobReply);
@@ -120,6 +122,7 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
             object.set('location', location);
             object.set('userID', Parse.User.current());
             object.set('status', status);
+            object.set('comment', comment);
             object.save().then(function (response) {
                 console.log('Updated jobReply', response);
                 var updatedApply = new Apply(response);
