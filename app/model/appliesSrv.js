@@ -68,15 +68,18 @@ app.factory("appliesSrv", function ($q, $http, userSrv) {
                 statusStr = "מוזמן לראיון";
                 break;
             case '3':
-                statusStr = "לא מתאים";
+                statusStr = "ממתין לתשובת המראיינים";
                 break;
             case '4':
-                statusStr = "מרכז הערכה";
+                statusStr = "לא מתאים";
                 break;
             case '5':
-                statusStr = "מתאים";
+                statusStr = "מרכז הערכה";
                 break;
             case '6':
+                statusStr = "מתאים";
+                break;
+            case '7':
                 statusStr = "תקן הוקפא";
                 break;
             default:

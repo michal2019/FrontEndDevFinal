@@ -59,3 +59,7 @@ form{
   font-size: 1.2em;
 }
  
+.dropdown-item_right {
+  text-align: right;
+  padding-right: 0.5em;
+}

@@ -60,18 +60,19 @@ app.controller("jobRepliesCtrl", function ($scope, userSrv, $location, appliesSr
 
     // Chart.JS
     var data = [];
-    $scope.labels = ["פנייה במייל", "מוזמן לראיון", "לא מתאים", "מרכז הערכה", "מתאים", "תקן הוקפא"];
+    $scope.labels = ["פנייה במייל", "מוזמן לראיון", "ממתין לתשובת המראיינים", "לא מתאים", "מרכז הערכה", "מתאים", "תקן הוקפא"];
     $scope.options = {
         legend: {
             display: true
         }
     }
-    $scope.colors = ['#72C02C', '#3498DB', '#6ce7cf', '#11d7d8', '#998099', '#ffffd2'];
+    $scope.colors = ['#b4d993', '#3498DB', '#436bb5', '#166958', '#11d7d8', '#998099', '#bcb1c7'];
 
 
     $scope.getChartData = function () {
         var mails = 0;
         var interviews = 0;
+        var waiting = 0;
         var notAfit = 0;
         var exams = 0;
         var fits = 0;
@@ -86,15 +87,18 @@ app.controller("jobRepliesCtrl", function ($scope, userSrv, $location, appliesSr
                     interviews++;
                     break;
                 case '3':
-                    notAfit++;
+                    waiting++;
                     break;
                 case '4':
-                    exams++;
+                    notAfit++;
                     break;
                 case '5':
-                    fits++;
+                    exams++;
                     break;
                 case '6':
+                    fits++;
+                    break;
+                case '7':
                     freezes++;
                     break;
                 default:
@@ -103,13 +107,14 @@ app.controller("jobRepliesCtrl", function ($scope, userSrv, $location, appliesSr
 
         data[0] = mails;
         data[1] = interviews;
-        data[2] = notAfit;
-        data[3] = exams;
-        data[4] = fits;
-        data[5] = freezes;
+        data[2] = waiting;
+        data[3] = notAfit;
+        data[4] = exams;
+        data[5] = fits;
+        data[6] = freezes;
         return data;
     }
-    $scope.labels = ["פנייה במייל", "מוזמן לראיון", "לא מתאים", "מרכז הערכה", "מתאים", "תקן הוקפא"];
+    $scope.labels = ["פנייה במייל", "מוזמן לראיון", "ממתין לתשובת המראיינים", "לא מתאים", "מרכז הערכה", "מתאים", "תקן הוקפא"];
     $scope.getStatus = function (status) {
         return appliesSrv.getStatus(status);
     }
