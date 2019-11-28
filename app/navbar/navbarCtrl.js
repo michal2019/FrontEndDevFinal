@@ -41,7 +41,7 @@ app.controller("navbarCtrl", function ($scope, userSrv, $location, appliesSrv, $
         getNotificationMs().then(function (ms) {
             for (var i = 0; i < userApplies.length; i++) {
                 let updateTime = userApplies[i].updateTime.getTime();
-                if (currentTime - updateTime > ms) { //notification after 3 day not updated in ms
+                if (currentTime - updateTime > ms && userApplies[i].status != Notafit) { //notification after 7 days not updated in ms and != Notafit
                     $scope.userNotifications.push(userApplies[i]);
                 }
                 if ($scope.userNotifications.length > 0) {
